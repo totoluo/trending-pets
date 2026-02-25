@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Trendy 2D style palette - deeper colors */
+  --background: #FFF0F5;
+  --background-card: #FFFFFF;
+  --foreground: #1A1523;
+  --muted: #6B5B7A;
+
+  /* Border colors for 2D effect */
+  --border-dark: #2D2438;
+  --border-medium: #E8D5E0;
+  --border-light: #FFD6E8;
+
+  /* Pink palette - more saturated */
+  --pink-50: #FFF0F5;
+  --pink-100: #FFE0ED;
+  --pink-200: #FFC2DB;
+  --pink-300: #FFA3C9;
+  --pink-400: #FF7EB3;
+  --pink-500: #FF5C9D;
+  --pink-600: #E8458A;
+
+  /* Accent colors */
+  --orange-400: #FFB067;
+  --orange-500: #FF9642;
+  --purple-400: #B794F6;
+  --purple-500: #9F7AEA;
+  --mint-400: #5AD9B3;
+  --mint-500: #38C99A;
+
+  /* 2D style shadows */
+  --shadow-2d: 4px 4px 0px var(--border-dark);
+  --shadow-2d-sm: 2px 2px 0px var(--border-dark);
+  --shadow-2d-hover: 6px 6px 0px var(--border-dark);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--pink-300);
+  color: var(--foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pink-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pink-400);
+  border: 2px solid var(--border-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pink-500);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 2D button hover effect */
+.btn-2d {
+  transition: all 0.15s ease;
+}
+.btn-2d:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--border-dark);
+}
+.btn-2d:active {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0px var(--border-dark);
+}
+
+/* Card 2D hover */
+.card-2d {
+  transition: all 0.2s ease;
+}
+.card-2d:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px var(--border-dark);
 }
