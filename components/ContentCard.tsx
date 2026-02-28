@@ -21,7 +21,7 @@ export function ContentCard({ item }: ContentCardProps) {
   if (hidden) return null;
 
   return (
-    <div className="group bg-white border-3 border-[#2D2438] rounded-2xl overflow-hidden shadow-[4px_4px_0px_#2D2438] hover:shadow-[6px_6px_0px_#2D2438] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200 cursor-pointer">
+    <div className="group flex flex-col bg-white border-3 border-[#2D2438] rounded-2xl overflow-hidden shadow-[4px_4px_0px_#2D2438] hover:shadow-[6px_6px_0px_#2D2438] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200 cursor-pointer">
       {/* Media with platform badge */}
       <div className="relative border-b-3 border-[#2D2438]">
         <EmbedPlayer item={item} onThumbnailError={() => setHidden(true)} />
@@ -32,7 +32,7 @@ export function ContentCard({ item }: ContentCardProps) {
         </div>
       </div>
 
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-1">
         {/* Creator info */}
         <div className="flex items-center gap-3 mb-3">
           {item.creator_avatar ? (
@@ -69,7 +69,7 @@ export function ContentCard({ item }: ContentCardProps) {
         )}
 
         {/* Stats with 2D styling */}
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap mt-auto">
           {/* Likes */}
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FFF3CD] border-2 border-[#2D2438] rounded-lg cursor-pointer hover:bg-[#FFE4A0] transition-colors">
             <svg className="w-4 h-4 text-[#F5A623]" fill="currentColor" viewBox="0 0 24 24">

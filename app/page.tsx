@@ -5,7 +5,6 @@ import { Platform, SortOption } from '@/lib/supabase';
 import { PlatformFilter } from '@/components/PlatformFilter';
 import { SortDropdown } from '@/components/SortDropdown';
 import { ContentGrid } from '@/components/ContentGrid';
-import { LastUpdated } from '@/components/LastUpdated';
 
 export default function Home() {
   const [platform, setPlatform] = useState<Platform | 'all'>('all');
@@ -45,19 +44,12 @@ export default function Home() {
               — all in one place.
             </p>
 
-            {/* Stats row */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              <StatBadge value="Daily" label="Updates" color="orange" />
-              <StatBadge value="3" label="Platforms" color="purple" />
-            </div>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 py-10">
-        <LastUpdated />
-
         {/* Section header */}
         <div className="flex items-center gap-3 mb-6">
           <div className="w-2 h-8 bg-[#F5A623] border-2 border-[#2D2438] rounded-sm"></div>
@@ -97,22 +89,5 @@ export default function Home() {
         </div>
       </div>
     </>
-  );
-}
-
-function StatBadge({ value, label, color }: { value: string; label: string; color: 'orange' | 'purple' }) {
-  const colors = {
-    orange: 'bg-[#FFB067]',
-    purple: 'bg-[#B794F6]',
-  };
-
-  return (
-    <div className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white border-2 border-[#2D2438] rounded-lg shadow-[2px_2px_0px_#2D2438]">
-      <div className={`w-2 h-2 ${colors[color]} border border-[#2D2438] rounded-full`}></div>
-      <div className="text-left">
-        <div className="text-sm sm:text-base font-black text-[#2D2438]">{value}</div>
-        <div className="text-[10px] font-bold text-[#6B5B7A] uppercase tracking-wide">{label}</div>
-      </div>
-    </div>
   );
 }

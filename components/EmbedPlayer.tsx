@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import DOMPurify from 'dompurify';
 import { ContentItem } from '@/lib/supabase';
 
@@ -50,12 +49,11 @@ export function EmbedPlayer({ item, onThumbnailError }: EmbedPlayerProps) {
     return (
       <div className="relative aspect-[4/5] bg-gradient-to-br from-pink-50 to-gray-50 overflow-hidden group">
         {item.thumbnail_url ? (
-          <Image
+          <img
             src={item.thumbnail_url}
             alt={item.title || item.description || 'Cat video'}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
             onError={() => { setEmbedError(true); onThumbnailError?.(); }}
           />
         ) : (
