@@ -9,7 +9,7 @@ import { LastUpdated } from '@/components/LastUpdated';
 
 export default function Home() {
   const [platform, setPlatform] = useState<Platform | 'all'>('all');
-  const [sort, setSort] = useState<SortOption>('trending');
+  const [sort, setSort] = useState<SortOption>('recent');
 
   return (
     <>

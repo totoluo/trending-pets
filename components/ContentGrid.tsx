@@ -38,7 +38,7 @@ const PLATFORMS = ['all', 'tiktok', 'xiaohongshu', 'youtube'];
 
 // Start preloading immediately when this module loads (before any component mounts)
 if (typeof window !== 'undefined') {
-  PLATFORMS.forEach(p => prefetch(p, 'trending'));
+  PLATFORMS.forEach(p => prefetch(p, 'recent'));
 }
 
 export function ContentGrid({ platform, sort }: ContentGridProps) {
