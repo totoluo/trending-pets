@@ -43,24 +43,26 @@ export function EmbedPlayer({ item, onThumbnailError }: EmbedPlayerProps) {
       })
     : '';
 
+  // XHS CDN signed URLs expire — rewrite to ci.xiaohongshu.com which needs no signature
+  const thumbnailSrc = item.thumbnail_url
+    ? item.platform === 'xiaohongshu'
+      ? rewriteXhsThumbnail(item.thumbnail_url)
+      : item.thumbnail_url
+    : null;
+
   const showThumbnailFallback = !item.embed_code || embedError || !showEmbed;
 
   if (showThumbnailFallback) {
     return (
       <div className="relative aspect-[4/5] bg-gradient-to-br from-pink-50 to-gray-50 overflow-hidden group">
-        {item.thumbnail_url && !embedError ? (
+        {thumbnailSrc && !embedError ? (
           <img
-            src={item.thumbnail_url}
+            src={thumbnailSrc}
             alt={item.title || item.description || 'Cat video'}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             referrerPolicy="no-referrer"
             loading="lazy"
-            onError={() => {
-              setEmbedError(true);
-              // Only hide the entire card for TikTok/YouTube (reliable thumbnail CDNs)
-              // XHS thumbnails expire, so show fallback instead of hiding
-              if (item.platform !== 'xiaohongshu') onThumbnailError?.();
-            }}
+            onError={() => { setEmbedError(true); onThumbnailError?.(); }}
           />
         ) : (
           <a
@@ -138,6 +140,23 @@ export function EmbedPlayer({ item, onThumbnailError }: EmbedPlayerProps) {
       </button>
     </div>
   );
+}
+
+// Rewrite XHS signed CDN URL to unsigned ci.xiaohongshu.com
+// Input:  http://sns-webpic-qc.xhscdn.com/DATE/SIGNATURE/IMAGE_PATH
+// Output: https://ci.xiaohongshu.com/IMAGE_PATH
+function rewriteXhsThumbnail(url: string): string {
+  try {
+    const parsed = new URL(url);
+    if (!parsed.hostname.includes('xhscdn.com')) return url;
+    // Path: /DATE/SIGNATURE/IMAGE_PATH or /DATE/SIGNATURE/spectrum/IMAGE_PATH
+    const segments = parsed.pathname.split('/').filter(Boolean);
+    // Skip first 2 segments (date + signature)
+    const imagePath = segments.slice(2).join('/');
+    return imagePath ? `https://ci.xiaohongshu.com/${imagePath}` : url;
+  } catch {
+    return url;
+  }
 }
 
 function getPlatformIcon(platform: string): string {
