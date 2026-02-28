@@ -37,7 +37,10 @@ export async function GET(request: NextRequest) {
     let q = supabase
       .from('content_items')
       .select('*')
-      .or(`published_at.gte.${publishCutoff},published_at.is.null`);
+      .or(`published_at.gte.${publishCutoff},published_at.is.null`)
+      .not('url', 'is', null)
+      .neq('url', '')
+      .not('thumbnail_url', 'is', null);
 
     // Platform filter
     if (platform && platform !== 'all') {
@@ -82,21 +85,10 @@ export async function GET(request: NextRequest) {
       ? data[data.length - 1].id
       : null;
 
-    // Get total count (same 30-day published_at window)
-    let totalCount: number | null = null;
-    try {
-      const countResult = await supabase
-        .from('content_items')
-        .select('*', { count: 'exact', head: true })
-        .or(`published_at.gte.${publishCutoff},published_at.is.null`);
-      totalCount = countResult.count;
-    } catch { /* ignore */ }
-
     return NextResponse.json({
       items: data || [],
       nextCursor,
       hasMore: !!nextCursor,
-      totalCount,
     });
 
   } catch (err) {

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { ContentItem } from '@/lib/supabase';
 import { EmbedPlayer } from './EmbedPlayer';
 
@@ -14,13 +15,16 @@ const PLATFORM_STYLES: Record<string, { bg: string; label: string }> = {
 };
 
 export function ContentCard({ item }: ContentCardProps) {
+  const [hidden, setHidden] = useState(false);
   const platformStyle = PLATFORM_STYLES[item.platform] || { bg: 'bg-[#6B5B7A]', label: item.platform };
+
+  if (hidden) return null;
 
   return (
     <div className="group bg-white border-3 border-[#2D2438] rounded-2xl overflow-hidden shadow-[4px_4px_0px_#2D2438] hover:shadow-[6px_6px_0px_#2D2438] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200 cursor-pointer">
       {/* Media with platform badge */}
       <div className="relative border-b-3 border-[#2D2438]">
-        <EmbedPlayer item={item} />
+        <EmbedPlayer item={item} onThumbnailError={() => setHidden(true)} />
 
         {/* Platform badge */}
         <div className={`absolute top-3 left-3 px-3 py-1 ${platformStyle.bg} border-2 border-[#2D2438] rounded-lg shadow-[2px_2px_0px_#2D2438]`}>

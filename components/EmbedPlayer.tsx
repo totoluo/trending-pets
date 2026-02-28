@@ -7,9 +7,10 @@ import { ContentItem } from '@/lib/supabase';
 
 interface EmbedPlayerProps {
   item: ContentItem;
+  onThumbnailError?: () => void;
 }
 
-export function EmbedPlayer({ item }: EmbedPlayerProps) {
+export function EmbedPlayer({ item, onThumbnailError }: EmbedPlayerProps) {
   const [showEmbed, setShowEmbed] = useState(false);
   const [embedError, setEmbedError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,7 +56,7 @@ export function EmbedPlayer({ item }: EmbedPlayerProps) {
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            onError={() => setEmbedError(true)}
+            onError={() => { setEmbedError(true); onThumbnailError?.(); }}
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
