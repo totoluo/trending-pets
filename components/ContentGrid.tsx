@@ -16,17 +16,30 @@ interface ApiResponse {
   hasMore: boolean;
 }
 
-// Preload cache for platform tabs
-const preloadCache = new Map<string, Promise<ApiResponse>>();
+// Two-layer cache: promises (for dedup) + resolved data (for instant access)
+const promiseCache = new Map<string, Promise<ApiResponse>>();
+const dataCache = new Map<string, ApiResponse>();
 
-function preloadPlatform(platform: string, sort: string) {
-  const key = `${platform}:${sort}`;
-  if (preloadCache.has(key)) return;
-  const params = new URLSearchParams({ platform, sort, limit: '6' });
-  preloadCache.set(key, fetch(`/api/content?${params}`).then(r => r.json()));
+function cacheKey(platform: string, sort: string) {
+  return `${platform}:${sort}`;
 }
 
-const PLATFORMS_TO_PRELOAD = ['all', 'tiktok', 'xiaohongshu', 'youtube'];
+function prefetch(platform: string, sort: string) {
+  const key = cacheKey(platform, sort);
+  if (promiseCache.has(key)) return;
+  const params = new URLSearchParams({ platform, sort, limit: '20' });
+  const promise = fetch(`/api/content?${params}`)
+    .then(r => { if (!r.ok) throw new Error('Failed'); return r.json(); })
+    .then((data: ApiResponse) => { dataCache.set(key, data); return data; });
+  promiseCache.set(key, promise);
+}
+
+const PLATFORMS = ['all', 'tiktok', 'xiaohongshu', 'youtube'];
+
+// Start preloading immediately when this module loads (before any component mounts)
+if (typeof window !== 'undefined') {
+  PLATFORMS.forEach(p => prefetch(p, 'trending'));
+}
 
 export function ContentGrid({ platform, sort }: ContentGridProps) {
   const [items, setItems] = useState<ContentItem[]>([]);
@@ -40,9 +53,9 @@ export function ContentGrid({ platform, sort }: ContentGridProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // Preload all platform tabs on mount
+  // Preload all tabs when sort changes
   useEffect(() => {
-    PLATFORMS_TO_PRELOAD.forEach(p => preloadPlatform(p, sort));
+    PLATFORMS.forEach(p => prefetch(p, sort));
   }, [sort]);
 
   const loadMore = useCallback(async () => {
@@ -77,31 +90,45 @@ export function ContentGrid({ platform, sort }: ContentGridProps) {
   }, [platform, sort, cursor, loadingMore]);
 
   useEffect(() => {
-    const fetchInitial = async () => {
-      setLoading(true);
+    let cancelled = false;
+    const key = cacheKey(platform, sort);
+
+    // If retry, clear caches to force fresh fetch
+    if (retryCount > 0) {
+      promiseCache.delete(key);
+      dataCache.delete(key);
+    }
+
+    // Instant path: data already resolved in cache — no loading spinner
+    const cached = dataCache.get(key);
+    if (cached) {
+      setItems(cached.items);
+      setCursor(cached.nextCursor);
+      setHasMore(cached.hasMore);
+      setLoading(false);
       setError(null);
+      return;
+    }
 
-      const params = new URLSearchParams({
-        platform,
-        sort,
-        limit: '20',
-      });
+    // Async path: show loading, await promise
+    setLoading(true);
+    setError(null);
+    prefetch(platform, sort);
+    promiseCache.get(key)!.then(data => {
+      if (cancelled) return;
+      setItems(data.items);
+      setCursor(data.nextCursor);
+      setHasMore(data.hasMore);
+    }).catch(err => {
+      if (cancelled) return;
+      promiseCache.delete(key);
+      dataCache.delete(key);
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    }).finally(() => {
+      if (!cancelled) setLoading(false);
+    });
 
-      try {
-        const response = await fetch(`/api/content?${params}`);
-        if (!response.ok) throw new Error('Failed to fetch content');
-        const data: ApiResponse = await response.json();
-        setItems(data.items);
-        setCursor(data.nextCursor);
-        setHasMore(data.hasMore);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchInitial();
+    return () => { cancelled = true; };
   }, [platform, sort, retryCount]);
 
   useEffect(() => {
