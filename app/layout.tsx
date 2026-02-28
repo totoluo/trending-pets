@@ -27,13 +27,13 @@ export default function RootLayout({
         <DemoBanner />
 
         {/* Header - 2D style */}
-        <header className="sticky top-0 z-50 bg-white border-b-3 border-[#2D2438]">
-          <div className="max-w-6xl mx-auto px-6">
+        <header className="sticky top-0 z-50 bg-white border-b-3 border-[#2D2438] overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
-              <a href="/" className="flex items-center gap-3 group">
-                <div className="w-11 h-11 bg-[#F5A623] border-3 border-[#2D2438] rounded-xl flex items-center justify-center shadow-[3px_3px_0px_#2D2438] group-hover:shadow-[4px_4px_0px_#2D2438] group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] transition-all">
-                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <a href="/" className="flex items-center gap-2 sm:gap-3 group shrink-0">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#F5A623] border-3 border-[#2D2438] rounded-xl flex items-center justify-center shadow-[3px_3px_0px_#2D2438] group-hover:shadow-[4px_4px_0px_#2D2438] group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] transition-all">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
                     <ellipse cx="12" cy="17" rx="5" ry="4"/>
                     <circle cx="6.5" cy="10" r="2.5"/>
                     <circle cx="17.5" cy="10" r="2.5"/>
@@ -42,13 +42,15 @@ export default function RootLayout({
                   </svg>
                 </div>
                 <div>
-                  <span className="text-xl font-black text-[#2D2438] block leading-tight tracking-tight">Cute Cats</span>
+                  <span className="text-lg sm:text-xl font-black text-[#2D2438] block leading-tight tracking-tight">Cute Cats</span>
                   <span className="text-[10px] text-[#F5A623] font-bold tracking-widest uppercase">Trending Daily</span>
                 </div>
               </a>
 
-              {/* Floating cats */}
-              <FloatingCats />
+              {/* Floating cats - hidden on mobile */}
+              <div className="hidden sm:block">
+                <FloatingCats />
+              </div>
             </div>
           </div>
         </header>

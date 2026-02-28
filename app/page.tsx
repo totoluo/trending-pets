@@ -15,40 +15,22 @@ export default function Home() {
     <>
       {/* Hero Section - 2D style */}
       <section className="relative overflow-hidden bg-[#FFF3CD] border-b-3 border-[#2D2438]">
-        {/* Decorative shapes */}
-        <div className="absolute top-8 left-12 w-16 h-16 bg-[#FFB067] border-3 border-[#2D2438] rounded-full"></div>
-        <div className="absolute top-24 right-16 w-12 h-12 bg-[#B794F6] border-3 border-[#2D2438] rounded-lg rotate-12"></div>
-        <div className="absolute bottom-12 left-1/4 w-10 h-10 bg-[#5AD9B3] border-3 border-[#2D2438] rounded-full"></div>
-        <div className="absolute bottom-20 right-1/4 w-8 h-8 bg-[#F5A623] border-2 border-[#2D2438] rounded-lg -rotate-12"></div>
-
-        {/* Paw prints */}
-        <div className="absolute top-16 right-1/3">
-          <svg className="w-10 h-10 text-[#2D2438] opacity-10" viewBox="0 0 24 24" fill="currentColor">
-            <ellipse cx="12" cy="17" rx="5" ry="4"/>
-            <circle cx="6.5" cy="10" r="2.5"/>
-            <circle cx="17.5" cy="10" r="2.5"/>
-            <circle cx="9" cy="6" r="2"/>
-            <circle cx="15" cy="6" r="2"/>
-          </svg>
+        {/* Decorative cat shapes */}
+        <div className="absolute z-20 top-8 left-12 w-16 h-16 bg-[#FF9CB8] border-3 border-[#2D2438] rounded-full flex items-center justify-center overflow-hidden">
+          <img src="/cats/sitting.png" alt="" className="w-12 h-12 object-contain" />
         </div>
-        <div className="absolute bottom-24 left-1/3 rotate-[-15deg]">
-          <svg className="w-8 h-8 text-[#2D2438] opacity-10" viewBox="0 0 24 24" fill="currentColor">
-            <ellipse cx="12" cy="17" rx="5" ry="4"/>
-            <circle cx="6.5" cy="10" r="2.5"/>
-            <circle cx="17.5" cy="10" r="2.5"/>
-            <circle cx="9" cy="6" r="2"/>
-            <circle cx="15" cy="6" r="2"/>
-          </svg>
+        <div className="absolute z-20 top-24 right-16 w-14 h-14 bg-[#B794F6] border-3 border-[#2D2438] rounded-lg rotate-12 flex items-center justify-center overflow-hidden">
+          <img src="/cats/playful.png" alt="" className="w-10 h-10 object-contain -rotate-12" />
+        </div>
+        <div className="absolute z-20 bottom-12 left-1/4 w-12 h-12 bg-[#5AD9B3] border-3 border-[#2D2438] rounded-full flex items-center justify-center overflow-hidden">
+          <img src="/cats/curious.png" alt="" className="w-9 h-9 object-contain" />
+        </div>
+        <div className="absolute z-20 bottom-20 right-1/4 w-12 h-12 bg-[#7EB8DA] border-2 border-[#2D2438] rounded-lg -rotate-12 flex items-center justify-center overflow-hidden">
+          <img src="/cats/sleeping.png" alt="" className="w-9 h-9 object-contain rotate-12" />
         </div>
 
         <div className="max-w-6xl mx-auto px-6 py-16 relative">
           <div className="text-center max-w-2xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-[#2D2438] rounded-full shadow-[3px_3px_0px_#2D2438] mb-6">
-              <span className="w-2 h-2 bg-[#5AD9B3] border border-[#2D2438] rounded-full"></span>
-              <span className="text-sm font-bold text-[#2D2438]">Updated daily with fresh content</span>
-            </div>
-
             {/* Main heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#2D2438] mb-6 leading-tight tracking-tight">
               Discover the Cutest
