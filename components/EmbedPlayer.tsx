@@ -48,18 +48,29 @@ export function EmbedPlayer({ item, onThumbnailError }: EmbedPlayerProps) {
   if (showThumbnailFallback) {
     return (
       <div className="relative aspect-[4/5] bg-gradient-to-br from-pink-50 to-gray-50 overflow-hidden group">
-        {item.thumbnail_url ? (
+        {item.thumbnail_url && !embedError ? (
           <img
             src={item.thumbnail_url}
             alt={item.title || item.description || 'Cat video'}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            referrerPolicy="no-referrer"
             loading="lazy"
-            onError={() => { setEmbedError(true); onThumbnailError?.(); }}
+            onError={() => {
+              setEmbedError(true);
+              // Only hide the entire card for TikTok/YouTube (reliable thumbnail CDNs)
+              // XHS thumbnails expire, so show fallback instead of hiding
+              if (item.platform !== 'xiaohongshu') onThumbnailError?.();
+            }}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-6xl opacity-50">🐱</span>
-          </div>
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 flex items-center justify-center bg-[#FFF3CD]"
+          >
+            <span className="text-6xl">🐱</span>
+          </a>
         )}
 
         {/* Clickable overlay - plays embed or opens original URL */}
