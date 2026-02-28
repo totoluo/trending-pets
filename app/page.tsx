@@ -29,15 +29,15 @@ export default function Home() {
           <img src="/cats/sleeping.png" alt="" className="w-9 h-9 object-contain rotate-12" />
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 py-16 relative">
-          <div className="text-center max-w-2xl mx-auto">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 relative z-10">
+          <div className="text-center max-w-2xl mx-auto bg-white/70 backdrop-blur-sm rounded-3xl px-6 sm:px-10 py-8 sm:py-10">
             {/* Main heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#2D2438] mb-6 leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#2D2438] mb-4 sm:mb-6 leading-tight tracking-tight">
               Discover the Cutest
               <span className="block text-[#F5A623]">Cat Videos</span>
             </h1>
 
-            <p className="text-lg text-[#6B5B7A] mb-10 leading-relaxed font-medium">
+            <p className="text-base sm:text-lg text-[#6B5B7A] mb-6 sm:mb-8 leading-relaxed font-medium">
               Your daily dose of adorable cats from
               <span className="text-[#F5A623] font-bold"> TikTok</span>,
               <span className="text-[#FF9642] font-bold"> 小红书</span>, and
@@ -45,7 +45,7 @@ export default function Home() {
             </p>
 
             {/* Stats row */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               <StatBadge value="50+" label="Cat Videos" color="pink" />
               <StatBadge value="Daily" label="Updates" color="orange" />
               <StatBadge value="3" label="Platforms" color="purple" />

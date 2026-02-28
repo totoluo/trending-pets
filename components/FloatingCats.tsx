@@ -7,8 +7,8 @@ const CAT_IMAGES = ['/cats/sitting.png', '/cats/playful.png', '/cats/curious.png
 const HEADER_CATS = [
   { img: 0, duration: 3.5, delay: 0 },
   { img: 1, duration: 4.2, delay: 0.8 },
-  { img: 2, duration: 3.8, delay: 0.3, desktopOnly: true },
-  { img: 3, duration: 4.5, delay: 1.2, desktopOnly: true },
+  { img: 2, duration: 3.8, delay: 0.3 },
+  { img: 3, duration: 4.5, delay: 1.2 },
 ];
 
 export function FloatingCats() {
@@ -17,9 +17,8 @@ export function FloatingCats() {
       {HEADER_CATS.map((cat, i) => (
         <div
           key={i}
-          className={`shrink-0 rounded-full bg-[#FFF3CD] flex items-center justify-center
-            w-9 h-9 sm:w-12 sm:h-12
-            ${cat.desktopOnly ? 'hidden sm:flex' : ''}`}
+          className="shrink-0 rounded-full bg-[#FFF3CD] flex items-center justify-center
+            w-9 h-9 sm:w-12 sm:h-12"
           style={{
             animation: `bounce-cat ${cat.duration}s ease-in-out ${cat.delay}s infinite`,
           }}
