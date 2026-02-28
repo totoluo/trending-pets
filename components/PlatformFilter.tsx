@@ -55,14 +55,14 @@ const PLATFORMS: { value: FilterOption; label: string; icon: ReactNode; activeCo
 
 export function PlatformFilter({ selected, onChange }: PlatformFilterProps) {
   return (
-    <div className="grid grid-cols-4 gap-2 w-full max-w-md">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full sm:max-w-md">
       {PLATFORMS.map(({ value, label, icon, activeColor }) => (
         <button
           key={value}
           onClick={() => onChange(value)}
           className={`
             flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold cursor-pointer
-            transition-all duration-150 border-2 border-[#2D2438] whitespace-nowrap
+            transition-all duration-150 border-2 border-[#2D2438]
             ${selected === value
               ? `${activeColor} shadow-[2px_2px_0px_#2D2438]`
               : 'bg-white text-[#2D2438] hover:bg-[#FFF3CD] shadow-[2px_2px_0px_#2D2438] hover:shadow-[3px_3px_0px_#2D2438] hover:translate-x-[-1px] hover:translate-y-[-1px]'

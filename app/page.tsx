@@ -30,7 +30,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 relative z-10">
-          <div className="text-center max-w-2xl mx-auto bg-white/70 backdrop-blur-sm rounded-3xl px-6 sm:px-10 py-8 sm:py-10">
+          <div className="text-center max-w-2xl mx-auto bg-white/40 backdrop-blur-sm rounded-3xl px-6 sm:px-10 py-8 sm:py-10">
             {/* Main heading */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#2D2438] mb-4 sm:mb-6 leading-tight tracking-tight">
               Discover the Cutest
@@ -84,11 +84,11 @@ function StatBadge({ value, label, color }: { value: string; label: string; colo
   };
 
   return (
-    <div className="flex items-center gap-3 px-5 py-3 bg-white border-3 border-[#2D2438] rounded-xl shadow-[3px_3px_0px_#2D2438]">
-      <div className={`w-3 h-3 ${colors[color]} border-2 border-[#2D2438] rounded-full`}></div>
+    <div className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white border-2 border-[#2D2438] rounded-lg shadow-[2px_2px_0px_#2D2438]">
+      <div className={`w-2 h-2 ${colors[color]} border border-[#2D2438] rounded-full`}></div>
       <div className="text-left">
-        <div className="text-xl font-black text-[#2D2438]">{value}</div>
-        <div className="text-xs font-bold text-[#6B5B7A] uppercase tracking-wide">{label}</div>
+        <div className="text-sm sm:text-base font-black text-[#2D2438]">{value}</div>
+        <div className="text-[10px] font-bold text-[#6B5B7A] uppercase tracking-wide">{label}</div>
       </div>
     </div>
   );
