@@ -23,7 +23,7 @@ export default function Error({
           Something went wrong
         </h2>
         <p className="text-gray-500 mb-6 max-w-sm">
-          We couldn&apos;t load the pet content. This might be a temporary issue.
+          We couldn&apos;t load the cat videos. This might be a temporary issue.
         </p>
         <button
           onClick={reset}

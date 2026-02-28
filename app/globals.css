@@ -2,24 +2,24 @@
 
 :root {
   /* Trendy 2D style palette - deeper colors */
-  --background: #FFF0F5;
+  --background: #FFFBEB;
   --background-card: #FFFFFF;
   --foreground: #1A1523;
   --muted: #6B5B7A;
 
   /* Border colors for 2D effect */
   --border-dark: #2D2438;
-  --border-medium: #E8D5E0;
-  --border-light: #FFD6E8;
+  --border-medium: #E0D5C0;
+  --border-light: #FFE8B0;
 
-  /* Pink palette - more saturated */
-  --pink-50: #FFF0F5;
-  --pink-100: #FFE0ED;
-  --pink-200: #FFC2DB;
-  --pink-300: #FFA3C9;
-  --pink-400: #FF7EB3;
-  --pink-500: #FF5C9D;
-  --pink-600: #E8458A;
+  /* Warm yellow/amber palette */
+  --warm-50: #FFFBEB;
+  --warm-100: #FFF3CD;
+  --warm-200: #FFE4A0;
+  --warm-300: #FFD77A;
+  --warm-400: #FFC94D;
+  --warm-500: #F5A623;
+  --warm-600: #D4891A;
 
   /* Accent colors */
   --orange-400: #FFB067;
@@ -49,7 +49,7 @@ body {
 }
 
 ::selection {
-  background: var(--pink-300);
+  background: var(--warm-300);
   color: var(--foreground);
 }
 
@@ -62,16 +62,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--pink-100);
+  background: var(--warm-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--pink-400);
+  background: var(--warm-400);
   border: 2px solid var(--border-dark);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--pink-500);
+  background: var(--warm-500);
 }
 
 @media (prefers-reduced-motion: reduce) {

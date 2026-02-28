@@ -51,7 +51,7 @@ export function EmbedPlayer({ item }: EmbedPlayerProps) {
         {item.thumbnail_url ? (
           <Image
             src={item.thumbnail_url}
-            alt={item.title || item.description || 'Pet content'}
+            alt={item.title || item.description || 'Cat video'}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

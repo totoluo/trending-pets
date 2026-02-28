@@ -21,12 +21,12 @@ export function DemoBanner() {
   if (!isDemo) return null;
 
   return (
-    <div className="bg-[#2D2438] text-white px-4 py-2.5 text-center border-b-2 border-[#FF5C9D]">
+    <div className="bg-[#2D2438] text-white px-4 py-2.5 text-center border-b-2 border-[#F5A623]">
       <div className="flex items-center justify-center gap-2">
-        <div className="w-3 h-3 bg-[#FF5C9D] border border-white rounded-full"></div>
+        <div className="w-3 h-3 bg-[#F5A623] border border-white rounded-full"></div>
         <span className="text-sm font-bold">
           Demo Mode
-          <span className="font-medium opacity-80"> — Showing sample pet content</span>
+          <span className="font-medium opacity-80"> — Showing sample cat content</span>
         </span>
       </div>
     </div>

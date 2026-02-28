@@ -14,12 +14,12 @@ export default function Home() {
   return (
     <>
       {/* Hero Section - 2D style */}
-      <section className="relative overflow-hidden bg-[#FFE0ED] border-b-3 border-[#2D2438]">
+      <section className="relative overflow-hidden bg-[#FFF3CD] border-b-3 border-[#2D2438]">
         {/* Decorative shapes */}
         <div className="absolute top-8 left-12 w-16 h-16 bg-[#FFB067] border-3 border-[#2D2438] rounded-full"></div>
         <div className="absolute top-24 right-16 w-12 h-12 bg-[#B794F6] border-3 border-[#2D2438] rounded-lg rotate-12"></div>
         <div className="absolute bottom-12 left-1/4 w-10 h-10 bg-[#5AD9B3] border-3 border-[#2D2438] rounded-full"></div>
-        <div className="absolute bottom-20 right-1/4 w-8 h-8 bg-[#FF5C9D] border-2 border-[#2D2438] rounded-lg -rotate-12"></div>
+        <div className="absolute bottom-20 right-1/4 w-8 h-8 bg-[#F5A623] border-2 border-[#2D2438] rounded-lg -rotate-12"></div>
 
         {/* Paw prints */}
         <div className="absolute top-16 right-1/3">
@@ -52,19 +52,19 @@ export default function Home() {
             {/* Main heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#2D2438] mb-6 leading-tight tracking-tight">
               Discover the Cutest
-              <span className="block text-[#FF5C9D]">Pet Videos</span>
+              <span className="block text-[#F5A623]">Cat Videos</span>
             </h1>
 
             <p className="text-lg text-[#6B5B7A] mb-10 leading-relaxed font-medium">
-              Your daily dose of adorable cats, dogs, and pets from
-              <span className="text-[#FF5C9D] font-bold"> TikTok</span>,
+              Your daily dose of adorable cats from
+              <span className="text-[#F5A623] font-bold"> TikTok</span>,
               <span className="text-[#FF9642] font-bold"> 小红书</span>, and
-              <span className="text-[#E8458A] font-bold"> YouTube</span>
+              <span className="text-[#D4891A] font-bold"> YouTube</span>
             </p>
 
             {/* Stats row */}
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <StatBadge value="50+" label="Cute Videos" color="pink" />
+              <StatBadge value="50+" label="Cat Videos" color="pink" />
               <StatBadge value="Daily" label="Updates" color="orange" />
               <StatBadge value="3" label="Platforms" color="purple" />
             </div>
@@ -78,7 +78,7 @@ export default function Home() {
 
         {/* Section header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-2 h-8 bg-[#FF5C9D] border-2 border-[#2D2438] rounded-sm"></div>
+          <div className="w-2 h-8 bg-[#F5A623] border-2 border-[#2D2438] rounded-sm"></div>
           <h2 className="text-2xl font-black text-[#2D2438] tracking-tight">Trending Now</h2>
         </div>
 
@@ -96,7 +96,7 @@ export default function Home() {
 
 function StatBadge({ value, label, color }: { value: string; label: string; color: 'pink' | 'orange' | 'purple' }) {
   const colors = {
-    pink: 'bg-[#FF5C9D]',
+    pink: 'bg-[#F5A623]',
     orange: 'bg-[#FFB067]',
     purple: 'bg-[#B794F6]',
   };

@@ -30,40 +30,66 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    let query = supabase
-      .from('content_items')
-      .select('*')
-      .eq('is_active', true);
+    const buildQuery = (daysCutoff: number, withTimeFilter: boolean) => {
+      let q = supabase
+        .from('content_items')
+        .select('*')
+        .eq('is_active', true);
 
-    // Platform filter
-    if (platform && platform !== 'all') {
-      query = query.eq('platform', platform as Platform);
+      if (withTimeFilter) {
+        const cutoff = new Date(Date.now() - daysCutoff * 86400000).toISOString();
+        q = q.or(`published_at.gte.${cutoff},published_at.is.null`);
+      }
+
+      // Platform filter
+      if (platform && platform !== 'all') {
+        q = q.eq('platform', platform as Platform);
+      }
+
+      // Sort order
+      switch (sort) {
+        case 'trending':
+          // Minimum score threshold to hide low-quality long tail
+          q = q.gt('trending_score', 3).order('trending_score', { ascending: false });
+          break;
+        case 'recent':
+          q = q.order('scraped_at', { ascending: false });
+          break;
+        case 'likes':
+          q = q.order('likes', { ascending: false });
+          break;
+        case 'rising':
+          // Require real previous data and meaningful growth
+          q = q
+            .not('prev_scraped_at', 'is', null)
+            .gt('prev_likes', 0)
+            .gt('growth_score', 0)
+            .order('growth_score', { ascending: false });
+          break;
+        default:
+          q = q.order('trending_score', { ascending: false });
+      }
+
+      // Cursor-based pagination
+      if (cursor) {
+        q = q.lt('id', cursor);
+      }
+
+      return q.limit(limit);
+    };
+
+    let data;
+    let error;
+
+    // Trending uses 30-day window; other sorts try 30 days with fallback
+    const result = await buildQuery(30, true);
+    if (result.error) {
+      const fallback = await buildQuery(30, false);
+      data = fallback.data;
+      error = fallback.error;
+    } else {
+      data = result.data;
     }
-
-    // Sort order
-    switch (sort) {
-      case 'trending':
-        query = query.order('trending_score', { ascending: false });
-        break;
-      case 'recent':
-        query = query.order('scraped_at', { ascending: false });
-        break;
-      case 'likes':
-        query = query.order('likes', { ascending: false });
-        break;
-      default:
-        query = query.order('trending_score', { ascending: false });
-    }
-
-    // Cursor-based pagination
-    if (cursor) {
-      query = query.lt('id', cursor);
-    }
-
-    // Limit results
-    query = query.limit(limit);
-
-    const { data, error } = await query;
 
     if (error) {
       console.error('Supabase error:', error);

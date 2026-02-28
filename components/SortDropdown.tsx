@@ -9,6 +9,7 @@ interface SortDropdownProps {
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: 'trending', label: 'Trending' },
+  { value: 'rising', label: 'Rising' },
   { value: 'recent', label: 'Most Recent' },
   { value: 'likes', label: 'Most Liked' },
 ];
@@ -24,7 +25,7 @@ export function SortDropdown({ selected, onChange }: SortDropdownProps) {
           className="
             appearance-none bg-white border-2 border-[#2D2438] rounded-lg
             pl-4 pr-10 py-2 text-sm font-bold text-[#2D2438]
-            cursor-pointer hover:bg-[#FFE0ED]
+            cursor-pointer hover:bg-[#FFF3CD]
             focus:outline-none focus:ring-0
             transition-colors shadow-[2px_2px_0px_#2D2438]
           "

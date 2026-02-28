@@ -30,6 +30,8 @@ export interface ContentItem {
   scraped_at: string;
   is_active: boolean;
   trending_score: number;
+  growth_score: number;
+  published_at: string | null;
   raw_data: Record<string, unknown> | null;
 }
 
@@ -44,4 +46,4 @@ export interface ScrapeRun {
 }
 
 export type Platform = ContentItem['platform'];
-export type SortOption = 'trending' | 'recent' | 'likes';
+export type SortOption = 'trending' | 'recent' | 'likes' | 'rising';

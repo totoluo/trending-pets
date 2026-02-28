@@ -8,9 +8,9 @@ interface ContentCardProps {
 }
 
 const PLATFORM_STYLES: Record<string, { bg: string; label: string }> = {
-  tiktok: { bg: 'bg-[#FF5C9D]', label: 'TikTok' },
+  tiktok: { bg: 'bg-[#F5A623]', label: 'TikTok' },
   xiaohongshu: { bg: 'bg-[#FF9642]', label: '小红书' },
-  youtube: { bg: 'bg-[#E8458A]', label: 'YouTube' },
+  youtube: { bg: 'bg-[#D4891A]', label: 'YouTube' },
 };
 
 export function ContentCard({ item }: ContentCardProps) {
@@ -38,8 +38,8 @@ export function ContentCard({ item }: ContentCardProps) {
               className="w-10 h-10 rounded-lg object-cover border-2 border-[#2D2438]"
             />
           ) : (
-            <div className="w-10 h-10 rounded-lg bg-[#FFE0ED] border-2 border-[#2D2438] flex items-center justify-center">
-              <span className="text-[#FF5C9D] text-sm font-black">
+            <div className="w-10 h-10 rounded-lg bg-[#FFF3CD] border-2 border-[#2D2438] flex items-center justify-center">
+              <span className="text-[#F5A623] text-sm font-black">
                 {(item.creator_name || 'U')[0].toUpperCase()}
               </span>
             </div>
@@ -49,7 +49,7 @@ export function ContentCard({ item }: ContentCardProps) {
               href={item.creator_url || '#'}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-bold text-[#2D2438] hover:text-[#FF5C9D] truncate block transition-colors cursor-pointer"
+              className="text-sm font-bold text-[#2D2438] hover:text-[#F5A623] truncate block transition-colors cursor-pointer"
             >
               {item.creator_name || 'Unknown'}
             </a>
@@ -67,8 +67,8 @@ export function ContentCard({ item }: ContentCardProps) {
         {/* Stats with 2D styling */}
         <div className="flex items-center gap-2 flex-wrap">
           {/* Likes */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FFE0ED] border-2 border-[#2D2438] rounded-lg cursor-pointer hover:bg-[#FFC2DB] transition-colors">
-            <svg className="w-4 h-4 text-[#FF5C9D]" fill="currentColor" viewBox="0 0 24 24">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FFF3CD] border-2 border-[#2D2438] rounded-lg cursor-pointer hover:bg-[#FFE4A0] transition-colors">
+            <svg className="w-4 h-4 text-[#F5A623]" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
             <span className="text-xs font-bold text-[#2D2438]">{formatNumber(item.likes)}</span>
