@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { DemoBanner } from "@/components/DemoBanner";
-import { FloatingCats } from "@/components/FloatingCats";
+import { FloatingCats, BackgroundCats } from "@/components/FloatingCats";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.variable} font-sans antialiased bg-[#FFFBEB]`}>
-        <FloatingCats />
+        <BackgroundCats />
         <DemoBanner />
 
         {/* Header - 2D style */}
@@ -47,21 +47,13 @@ export default function RootLayout({
                 </div>
               </a>
 
-              {/* Nav */}
-              <nav className="flex items-center gap-2">
-                <a
-                  href="/api/health"
-                  target="_blank"
-                  className="ml-2 px-4 py-2 text-sm font-bold text-white bg-[#2D2438] border-2 border-[#2D2438] rounded-lg hover:bg-[#3D3448] transition-colors cursor-pointer"
-                >
-                  Status
-                </a>
-              </nav>
+              {/* Floating cats */}
+              <FloatingCats />
             </div>
           </div>
         </header>
 
-        <main className="min-h-[calc(100vh-200px)]">
+        <main className="relative z-10 min-h-[calc(100vh-200px)]">
           {children}
         </main>
 
