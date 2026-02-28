@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Platform, SortOption } from '@/lib/supabase';
 import { PlatformFilter } from '@/components/PlatformFilter';
 import { SortDropdown } from '@/components/SortDropdown';
@@ -10,6 +10,16 @@ import { LastUpdated } from '@/components/LastUpdated';
 export default function Home() {
   const [platform, setPlatform] = useState<Platform | 'all'>('all');
   const [sort, setSort] = useState<SortOption>('trending');
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('/api/content?platform=all&sort=trending&limit=1')
+      .then(r => r.json())
+      .then(data => {
+        if (data.totalCount != null) setTotalCount(data.totalCount);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <>
@@ -47,7 +57,7 @@ export default function Home() {
 
             {/* Stats row */}
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              <StatBadge value="50+" label="Cat Videos" color="pink" />
+              <StatBadge value={totalCount ? `${totalCount}+` : '...'} label="Cat Videos" color="pink" />
               <StatBadge value="Daily" label="Updates" color="orange" />
               <StatBadge value="3" label="Platforms" color="purple" />
             </div>
