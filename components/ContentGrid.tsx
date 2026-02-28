@@ -138,6 +138,7 @@ export function ContentGrid({ platform, sort }: ContentGridProps) {
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
+        if (document.body.dataset.pauseScroll) return;
         if (entries[0].isIntersecting && hasMore && !loadingMore && !loading) {
           loadMore();
         }
