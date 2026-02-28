@@ -15,17 +15,17 @@ export default function Home() {
     <>
       {/* Hero Section - 2D style */}
       <section className="relative overflow-hidden bg-[#FFF3CD] border-b-3 border-[#2D2438]">
-        {/* Decorative cat shapes */}
-        <div className="absolute z-20 top-8 left-12 w-16 h-16 bg-[#FF9CB8] border-3 border-[#2D2438] rounded-full flex items-center justify-center overflow-hidden">
+        {/* Decorative cat shapes - behind text */}
+        <div className="absolute z-0 top-8 left-12 w-16 h-16 bg-[#FF9CB8] border-3 border-[#2D2438] rounded-full flex items-center justify-center overflow-hidden">
           <img src="/cats/sitting.png" alt="" className="w-12 h-12 object-contain" />
         </div>
-        <div className="absolute z-20 top-24 right-16 w-14 h-14 bg-[#B794F6] border-3 border-[#2D2438] rounded-lg rotate-12 flex items-center justify-center overflow-hidden">
+        <div className="absolute z-0 top-24 right-16 w-14 h-14 bg-[#B794F6] border-3 border-[#2D2438] rounded-lg rotate-12 flex items-center justify-center overflow-hidden">
           <img src="/cats/playful.png" alt="" className="w-10 h-10 object-contain -rotate-12" />
         </div>
-        <div className="absolute z-20 bottom-12 left-1/4 w-12 h-12 bg-[#5AD9B3] border-3 border-[#2D2438] rounded-full flex items-center justify-center overflow-hidden">
+        <div className="absolute z-0 bottom-12 left-1/4 w-12 h-12 bg-[#5AD9B3] border-3 border-[#2D2438] rounded-full flex items-center justify-center overflow-hidden">
           <img src="/cats/curious.png" alt="" className="w-9 h-9 object-contain" />
         </div>
-        <div className="absolute z-20 bottom-20 right-1/4 w-12 h-12 bg-[#7EB8DA] border-2 border-[#2D2438] rounded-lg -rotate-12 flex items-center justify-center overflow-hidden">
+        <div className="absolute z-0 bottom-20 right-1/4 w-12 h-12 bg-[#7EB8DA] border-2 border-[#2D2438] rounded-lg -rotate-12 flex items-center justify-center overflow-hidden">
           <img src="/cats/sleeping.png" alt="" className="w-9 h-9 object-contain rotate-12" />
         </div>
 

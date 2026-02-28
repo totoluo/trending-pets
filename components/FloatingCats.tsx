@@ -5,22 +5,22 @@ const CAT_IMAGES = ['/cats/sitting.png', '/cats/playful.png', '/cats/curious.png
 /* ── Header cats (inline, bounce in the nav bar) ── */
 
 const HEADER_CATS = [
-  { img: 0, size: 40, duration: 3.5, delay: 0 },
-  { img: 1, size: 38, duration: 4.2, delay: 0.8 },
-  { img: 2, size: 40, duration: 3.8, delay: 0.3 },
-  { img: 3, size: 38, duration: 4.5, delay: 1.2 },
+  { img: 0, duration: 3.5, delay: 0 },
+  { img: 1, duration: 4.2, delay: 0.8 },
+  { img: 2, duration: 3.8, delay: 0.3, desktopOnly: true },
+  { img: 3, duration: 4.5, delay: 1.2, desktopOnly: true },
 ];
 
 export function FloatingCats() {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1 sm:gap-2">
       {HEADER_CATS.map((cat, i) => (
         <div
           key={i}
-          className="shrink-0 rounded-full bg-[#FFF3CD] flex items-center justify-center"
+          className={`shrink-0 rounded-full bg-[#FFF3CD] flex items-center justify-center
+            w-9 h-9 sm:w-12 sm:h-12
+            ${cat.desktopOnly ? 'hidden sm:flex' : ''}`}
           style={{
-            width: cat.size + 8,
-            height: cat.size + 8,
             animation: `bounce-cat ${cat.duration}s ease-in-out ${cat.delay}s infinite`,
           }}
         >
@@ -28,8 +28,7 @@ export function FloatingCats() {
           <img
             src={CAT_IMAGES[cat.img]}
             alt=""
-            width={cat.size}
-            height={cat.size}
+            className="w-6 h-6 sm:w-9 sm:h-9"
           />
         </div>
       ))}

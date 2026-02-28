@@ -47,10 +47,8 @@ export default function RootLayout({
                 </div>
               </a>
 
-              {/* Floating cats - hidden on mobile */}
-              <div className="hidden sm:block">
-                <FloatingCats />
-              </div>
+              {/* Floating cats */}
+              <FloatingCats />
             </div>
           </div>
         </header>
