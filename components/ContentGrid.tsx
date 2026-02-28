@@ -16,6 +16,18 @@ interface ApiResponse {
   hasMore: boolean;
 }
 
+// Preload cache for platform tabs
+const preloadCache = new Map<string, Promise<ApiResponse>>();
+
+function preloadPlatform(platform: string, sort: string) {
+  const key = `${platform}:${sort}`;
+  if (preloadCache.has(key)) return;
+  const params = new URLSearchParams({ platform, sort, limit: '6' });
+  preloadCache.set(key, fetch(`/api/content?${params}`).then(r => r.json()));
+}
+
+const PLATFORMS_TO_PRELOAD = ['all', 'tiktok', 'xiaohongshu', 'youtube'];
+
 export function ContentGrid({ platform, sort }: ContentGridProps) {
   const [items, setItems] = useState<ContentItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -27,6 +39,11 @@ export function ContentGrid({ platform, sort }: ContentGridProps) {
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  // Preload all platform tabs on mount
+  useEffect(() => {
+    PLATFORMS_TO_PRELOAD.forEach(p => preloadPlatform(p, sort));
+  }, [sort]);
 
   const loadMore = useCallback(async () => {
     if (!cursor || loadingMore) return;

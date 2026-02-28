@@ -63,8 +63,8 @@ export function EmbedPlayer({ item }: EmbedPlayerProps) {
           </div>
         )}
 
-        {/* Play button overlay */}
-        {item.embed_code && !embedError && (
+        {/* Clickable overlay - plays embed or opens original URL */}
+        {item.embed_code && !embedError ? (
           <button
             onClick={() => setShowEmbed(true)}
             className="
@@ -74,36 +74,32 @@ export function EmbedPlayer({ item }: EmbedPlayerProps) {
             "
           >
             <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-100 scale-90">
-              <svg className="w-6 h-6 text-pink-500 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-[#F5A623] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
           </button>
-        )}
-
-        {/* Platform badge - Notion style */}
-        <div className="absolute top-2.5 left-2.5">
-          <span className="px-2 py-1 rounded-md text-[11px] font-medium bg-white/90 text-gray-600 backdrop-blur-sm shadow-sm">
-            {getPlatformIcon(item.platform)} {getPlatformLabel(item.platform)}
-          </span>
-        </div>
-
-        {/* External link for platforms without embeds */}
-        {(!item.embed_code || embedError) && (
+        ) : (
           <a
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              absolute bottom-2.5 right-2.5 px-3 py-1.5 rounded-md
-              text-[11px] font-medium bg-white/90 text-pink-500
-              hover:bg-pink-500 hover:text-white
-              transition-colors backdrop-blur-sm shadow-sm
-            "
+            className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-200 cursor-pointer"
           >
-            View →
+            <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-100 scale-90">
+              <svg className="w-6 h-6 text-[#F5A623] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
           </a>
         )}
+
+        {/* Platform badge */}
+        <div className="absolute top-2.5 left-2.5 pointer-events-none">
+          <span className="px-2 py-1 rounded-md text-[11px] font-medium bg-white/90 text-gray-600 backdrop-blur-sm shadow-sm">
+            {getPlatformIcon(item.platform)} {getPlatformLabel(item.platform)}
+          </span>
+        </div>
       </div>
     );
   }
