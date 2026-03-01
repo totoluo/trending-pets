@@ -57,7 +57,7 @@ export function ContentCard({ item }: ContentCardProps) {
             >
               {item.creator_name || 'Unknown'}
             </a>
-            <span className="text-xs font-semibold text-[#6B5B7A]">Creator</span>
+            <span className="text-xs font-semibold text-[#6B5B7A]">{platformStyle.label}</span>
           </div>
         </div>
 

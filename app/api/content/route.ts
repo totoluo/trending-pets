@@ -96,7 +96,7 @@ export async function GET(request: NextRequest) {
     // Sort order
     switch (sort) {
       case 'trending':
-        q = q.gt('trending_score', 1).order('trending_score', { ascending: false });
+        q = q.gt('trending_score', 0).order('trending_score', { ascending: false });
         break;
       case 'recent':
         q = q.order('scraped_at', { ascending: false });
